@@ -14,16 +14,33 @@ import java.util.Optional;
 
 public class ProductDAOImpl implements ProductDAO {
 
+
+    private static final String SAVE = "INSERT INTO product (id, name, price) VALUES (?,?,?)";
     private static final String FINDBYID = " SELECT * FROM product WHERE id = ? ";
     private static final String FINDALL = " SELECT * FROM product ";
     private static final String FINDBYNAME = " SELECT * FROM product WHERE name LIKE ? ";
-    private static final String FINDBYPRICE = " SELECT * FROM product WHERE price BETWEEN MAX(price) AND MIN(price ) ";
+    private static final String FINDBYPRICE = " SELECT * FROM product WHERE price BETWEEN ? AND ? ";
     private static final String DELETEBYID = " DELETE FROM product WHERE id = ? ";
 
 
     @Override
     public Product save(Product product) {
-        return null;
+
+        try {
+            Connection connection = MySQLConnection.myConnection();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(SAVE);
+            preparedStatement.setInt(1, product.getId());
+            preparedStatement.setString(2, product.getName());
+            preparedStatement.setDouble(3, product.getPrice());
+
+            preparedStatement.execute();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return product;
     }
 
     @Override
@@ -81,7 +98,7 @@ public class ProductDAOImpl implements ProductDAO {
             Connection connection = MySQLConnection.myConnection();
 
             PreparedStatement preparedStatement = connection.prepareStatement(FINDBYNAME);
-            preparedStatement.setString(1,name);
+            preparedStatement.setString(1, name);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
@@ -107,6 +124,8 @@ public class ProductDAOImpl implements ProductDAO {
             Connection connection = MySQLConnection.myConnection();
 
             PreparedStatement preparedStatement = connection.prepareStatement(FINDBYPRICE);
+            preparedStatement.setInt(1, low);
+            preparedStatement.setInt(2, high);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
@@ -130,12 +149,9 @@ public class ProductDAOImpl implements ProductDAO {
             Connection connection = MySQLConnection.myConnection();
 
             PreparedStatement preparedStatement = connection.prepareStatement(DELETEBYID);
-            preparedStatement.setString(1,"id");
+            preparedStatement.setInt(1,id);
 
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
-                System.out.println(resultSet.toString());
-            }
+            preparedStatement.execute();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
