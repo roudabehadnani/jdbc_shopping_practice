@@ -1,11 +1,14 @@
 package org.example;
 
 import org.example.impl.ProductDAOImpl;
+import org.example.impl.ShoppingCartDAOImpl;
 import org.example.model.Product;
-
+import org.example.model.ShoppingCart;
 
 public class App {
     public static void main( String[] args ) {
+
+//-----------------product implementation----------------
 
         ProductDAOImpl productDAO = new ProductDAOImpl();
 
@@ -19,5 +22,26 @@ public class App {
         System.out.println("/-------------");
         productDAO.findByPriceBetween(150,300).forEach(System.out ::println);
 //        productDAO.delete(12);
+
+//-----------------shopping cart implementation----------------
+
+        ShoppingCartDAOImpl shoppingCartDAO = new ShoppingCartDAOImpl();
+
+//        System.out.println(shoppingCartDAO.save(new ShoppingCart(6, LocalDateTime.now(),"delivered", "Germany","Arash Ventar")));
+
+        shoppingCartDAO.findAll().forEach(System.out :: println);
+
+        System.out.println("/-------------");
+        System.out.println(shoppingCartDAO.findByOrderStatus(new ShoppingCart("pending")));
+
+        System.out.println("/-------------");
+        // TODO: 1/09/2022
+//        shoppingCartDAO.findByReference();
+
+//        shoppingCartDAO.delete(6);
+
+
+
+
     }
 }

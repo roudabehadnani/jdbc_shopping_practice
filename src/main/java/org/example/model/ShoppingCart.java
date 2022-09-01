@@ -1,6 +1,8 @@
 package org.example.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 public class ShoppingCart {
@@ -15,13 +17,27 @@ public class ShoppingCart {
     public ShoppingCart() {
     }
 
-    public ShoppingCart(int id, LocalDateTime lastUpdate, String orderStatus, String deliveryAddress, String customerReference, boolean paymentApproved) {
+    public ShoppingCart(String orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public ShoppingCart(LocalDateTime lastUpdate, String orderStatus, String deliveryAddress, String customerReference) {
+        this.lastUpdate = lastUpdate;
+        this.orderStatus = orderStatus;
+        this.deliveryAddress = deliveryAddress;
+        this.customerReference = customerReference;
+    }
+
+    //    public ShoppingCart(String customerReference){
+//        this.customerReference = customerReference;
+//    }
+
+    public ShoppingCart(int id, LocalDateTime lastUpdate, String orderStatus, String deliveryAddress, String customerReference) {
         this.id = id;
         this.lastUpdate = lastUpdate;
         this.orderStatus = orderStatus;
         this.deliveryAddress = deliveryAddress;
         this.customerReference = customerReference;
-        this.paymentApproved = paymentApproved;
     }
 
     public int getId() {
@@ -96,5 +112,4 @@ public class ShoppingCart {
                 ", paymentApproved=" + paymentApproved +
                 '}';
     }
-
 }
