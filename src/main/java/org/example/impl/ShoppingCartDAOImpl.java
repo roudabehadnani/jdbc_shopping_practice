@@ -92,7 +92,7 @@ public class ShoppingCartDAOImpl implements ShoppingCartDAO {
     }
 
     @Override
-    public List<ShoppingCart> findByOrderStatus(ShoppingCart status) {
+    public List<ShoppingCart> findByOrderStatus(String status) {
 
         List<ShoppingCart> cartList = new ArrayList<>();
 
@@ -100,7 +100,7 @@ public class ShoppingCartDAOImpl implements ShoppingCartDAO {
             Connection connection = MySQLConnection.myConnection();
 
             PreparedStatement preparedStatement = connection.prepareStatement(FINDBYORDERSTATUS);
-            preparedStatement.setString(1, status.getOrderStatus());
+            preparedStatement.setString(1, status);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
@@ -119,14 +119,14 @@ public class ShoppingCartDAOImpl implements ShoppingCartDAO {
     }
 
     @Override
-    public List<ShoppingCart> findByReference(ShoppingCart customer) {
+    public List<ShoppingCart> findByReference(String customer) {
         List<ShoppingCart> cartList = new ArrayList<>();
 
         try {
             Connection connection = MySQLConnection.myConnection();
 
             PreparedStatement preparedStatement = connection.prepareStatement(FINDBYREFERENCE);
-            preparedStatement.setString(1, customer.getCustomerReference());
+            preparedStatement.setString(1, customer);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){

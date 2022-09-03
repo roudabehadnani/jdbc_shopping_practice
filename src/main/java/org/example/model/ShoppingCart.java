@@ -15,21 +15,6 @@ public class ShoppingCart {
     public ShoppingCart() {
     }
 
-    public ShoppingCart(String orderStatus) {
-        this.orderStatus = orderStatus;
-    }
-
-    public ShoppingCart(LocalDateTime lastUpdate, String orderStatus, String deliveryAddress, String customerReference) {
-        setLastUpdate(lastUpdate);
-        this.orderStatus = orderStatus;
-        this.deliveryAddress = deliveryAddress;
-        this.customerReference = customerReference;
-    }
-
-    //    public ShoppingCart(String customerReference){
-//        this.customerReference = customerReference;
-//    }
-
     public ShoppingCart(int id, LocalDateTime lastUpdate, String orderStatus, String deliveryAddress, String customerReference) {
         this.id = id;
         setLastUpdate(lastUpdate);
