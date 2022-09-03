@@ -1,8 +1,6 @@
 package org.example.model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Objects;
 
 public class ShoppingCart {
@@ -22,7 +20,7 @@ public class ShoppingCart {
     }
 
     public ShoppingCart(LocalDateTime lastUpdate, String orderStatus, String deliveryAddress, String customerReference) {
-        this.lastUpdate = lastUpdate;
+        setLastUpdate(lastUpdate);
         this.orderStatus = orderStatus;
         this.deliveryAddress = deliveryAddress;
         this.customerReference = customerReference;
@@ -34,7 +32,7 @@ public class ShoppingCart {
 
     public ShoppingCart(int id, LocalDateTime lastUpdate, String orderStatus, String deliveryAddress, String customerReference) {
         this.id = id;
-        this.lastUpdate = lastUpdate;
+        setLastUpdate(lastUpdate);
         this.orderStatus = orderStatus;
         this.deliveryAddress = deliveryAddress;
         this.customerReference = customerReference;
@@ -53,7 +51,7 @@ public class ShoppingCart {
     }
 
     public void setLastUpdate(LocalDateTime lastUpdate) {
-        this.lastUpdate = lastUpdate;
+        this.lastUpdate = LocalDateTime.now();
     }
 
     public String getOrderStatus() {

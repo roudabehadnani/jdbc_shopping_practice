@@ -1,9 +1,9 @@
 package org.example;
 
+import org.example.dao.ShoppingCartItemDAO;
 import org.example.impl.ProductDAOImpl;
 import org.example.impl.ShoppingCartDAOImpl;
-import org.example.model.Product;
-import org.example.model.ShoppingCart;
+import org.example.impl.ShoppingCartItemDAOImpl;
 
 public class App {
     public static void main( String[] args ) {
@@ -23,7 +23,7 @@ public class App {
         productDAO.findByPriceBetween(150,300).forEach(System.out ::println);
 //        productDAO.delete(12);
 
-//-----------------shopping cart implementation----------------
+//-----------------shoppingCart implementation----------------
 
         ShoppingCartDAOImpl shoppingCartDAO = new ShoppingCartDAOImpl();
 
@@ -32,7 +32,7 @@ public class App {
         shoppingCartDAO.findAll().forEach(System.out :: println);
 
         System.out.println("/-------------");
-        System.out.println(shoppingCartDAO.findByOrderStatus(new ShoppingCart("pending")));
+//        System.out.println(shoppingCartDAO.findByOrderStatus(new ShoppingCart("pending")));
 
         System.out.println("/-------------");
         // TODO: 1/09/2022
@@ -41,7 +41,20 @@ public class App {
 //        shoppingCartDAO.delete(6);
 
 
+//-----------------shoppingCartItem implementation----------------
 
+        ShoppingCartItemDAO shoppingCartItemDAO = new ShoppingCartItemDAOImpl();
+
+        shoppingCartItemDAO.findAll().forEach(System.out::println);
+
+        System.out.println("/-------------");
+        System.out.println(shoppingCartItemDAO.findById(4));
+
+        System.out.println("/-------------");
+        shoppingCartItemDAO.findByCartId(5).forEach(System.out::println);
+
+        System.out.println("/-------------");
+        shoppingCartItemDAO.findByProductId(3).forEach(System.out::println);
 
     }
 }
